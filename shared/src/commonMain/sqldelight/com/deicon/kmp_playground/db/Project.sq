@@ -1,0 +1,48 @@
+-- Project table
+CREATE TABLE IF NOT EXISTS project (
+    id TEXT NOT NULL PRIMARY KEY,
+    customer_id TEXT NOT NULL,
+    name TEXT NOT NULL,
+    description TEXT,
+    created_at INTEGER NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES customer(id) ON DELETE CASCADE
+);
+
+-- Create indexes for faster lookups
+CREATE INDEX IF NOT EXISTS idx_project_customer_id ON project(customer_id);
+CREATE INDEX IF NOT EXISTS idx_project_name ON project(name);
+
+-- Queries
+
+selectAll:
+SELECT * FROM project ORDER BY created_at DESC;
+
+selectById:
+SELECT * FROM project WHERE id = ?;
+
+selectByCustomerId:
+SELECT * FROM project WHERE customer_id = ? ORDER BY created_at DESC;
+
+selectByName:
+SELECT * FROM project WHERE name LIKE ? ORDER BY name;
+
+insert:
+INSERT INTO project (id, customer_id, name, description, created_at)
+VALUES (?, ?, ?, ?, ?);
+
+update:
+UPDATE project
+SET customer_id = ?, name = ?, description = ?, created_at = ?
+WHERE id = ?;
+
+delete:
+DELETE FROM project WHERE id = ?;
+
+deleteByCustomerId:
+DELETE FROM project WHERE customer_id = ?;
+
+count:
+SELECT COUNT(*) FROM project;
+
+countByCustomerId:
+SELECT COUNT(*) FROM project WHERE customer_id = ?;

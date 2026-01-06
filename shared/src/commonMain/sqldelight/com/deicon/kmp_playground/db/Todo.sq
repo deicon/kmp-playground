@@ -1,0 +1,84 @@
+-- Todo table
+CREATE TABLE IF NOT EXISTS todo (
+    id TEXT NOT NULL PRIMARY KEY,
+    project_id TEXT NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT,
+    due_date INTEGER,
+    estimated_hours REAL,
+    actual_hours REAL NOT NULL DEFAULT 0.0,
+    completed INTEGER NOT NULL DEFAULT 0,
+    created_at INTEGER NOT NULL,
+    completed_at INTEGER,
+    FOREIGN KEY (project_id) REFERENCES project(id) ON DELETE CASCADE
+);
+
+-- Create indexes for faster lookups
+CREATE INDEX IF NOT EXISTS idx_todo_project_id ON todo(project_id);
+CREATE INDEX IF NOT EXISTS idx_todo_due_date ON todo(due_date);
+CREATE INDEX IF NOT EXISTS idx_todo_completed ON todo(completed);
+
+-- Queries
+
+selectAll:
+SELECT * FROM todo ORDER BY created_at DESC;
+
+selectById:
+SELECT * FROM todo WHERE id = ?;
+
+selectByProjectId:
+SELECT * FROM todo WHERE project_id = ? ORDER BY due_date ASC, created_at DESC;
+
+selectByCompleted:
+SELECT * FROM todo WHERE completed = ? ORDER BY created_at DESC;
+
+selectByDueDate:
+SELECT * FROM todo WHERE due_date <= ? AND completed = 0 ORDER BY due_date ASC;
+
+selectOverdue:
+SELECT * FROM todo WHERE due_date < ? AND completed = 0 ORDER BY due_date ASC;
+
+insert:
+INSERT INTO todo (id, project_id, title, description, due_date, estimated_hours, actual_hours, completed, created_at, completed_at)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+update:
+UPDATE todo
+SET project_id = ?, title = ?, description = ?, due_date = ?, estimated_hours = ?, actual_hours = ?, completed = ?, created_at = ?, completed_at = ?
+WHERE id = ?;
+
+updateActualHours:
+UPDATE todo
+SET actual_hours = ?
+WHERE id = ?;
+
+markCompleted:
+UPDATE todo
+SET completed = 1, completed_at = ?
+WHERE id = ?;
+
+markIncomplete:
+UPDATE todo
+SET completed = 0, completed_at = NULL
+WHERE id = ?;
+
+delete:
+DELETE FROM todo WHERE id = ?;
+
+deleteByProjectId:
+DELETE FROM todo WHERE project_id = ?;
+
+count:
+SELECT COUNT(*) FROM todo;
+
+countByProjectId:
+SELECT COUNT(*) FROM todo WHERE project_id = ?;
+
+countCompleted:
+SELECT COUNT(*) FROM todo WHERE completed = 1;
+
+sumEstimatedHoursByProjectId:
+SELECT COALESCE(SUM(estimated_hours), 0.0) FROM todo WHERE project_id = ?;
+
+sumActualHoursByProjectId:
+SELECT COALESCE(SUM(actual_hours), 0.0) FROM todo WHERE project_id = ?;

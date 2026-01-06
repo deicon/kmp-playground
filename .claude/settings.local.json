@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(git init:*)",
+      "Bash(gradle wrapper:*)",
+      "Bash(./gradlew :shared:build:*)",
+      "Bash(./gradlew :shared:jvmTest:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}

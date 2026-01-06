@@ -1,0 +1,36 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Source code
+*.kt text
+*.kts text
+*.java text
+*.xml text
+*.json text
+*.yaml text
+*.yml text
+*.toml text
+*.properties text
+*.conf text
+*.sql text
+*.sq text
+
+# Scripts
+*.sh text eol=lf
+*.bash text eol=lf
+
+# Documentation
+*.md text
+*.txt text
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.wasm binary
+*.jar binary
+*.zip binary
+*.tar binary
+*.gz binary
