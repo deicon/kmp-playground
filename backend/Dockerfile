@@ -19,11 +19,11 @@ COPY shared shared/
 # Copy backend module
 COPY backend backend/
 
-# Build the application
-RUN ./gradlew :backend:build -x test --no-daemon
+# Build the application with Shadow JAR
+RUN ./gradlew :backend:shadowJar --no-daemon
 
 # Stage 2: Runtime
-FROM eclipse-temurin:17-jre-alpine
+FROM amazoncorretto:17-alpine
 
 WORKDIR /app
 

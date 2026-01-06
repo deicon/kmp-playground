@@ -5,6 +5,9 @@ FROM gradle:8.5-jdk17 AS build
 
 WORKDIR /app
 
+# Install libatomic for Node.js on ARM64
+RUN apt-get update && apt-get install -y libatomic1 && rm -rf /var/lib/apt/lists/*
+
 # Copy gradle files
 COPY gradle gradle
 COPY gradlew .
