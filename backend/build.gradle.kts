@@ -2,6 +2,7 @@ plugins {
     kotlin("jvm")
     kotlin("plugin.serialization")
     application
+    id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 application {
@@ -11,6 +12,9 @@ application {
 dependencies {
     // Shared module
     implementation(project(":shared"))
+
+    // Kotlinx libraries
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:${property("kotlinx.datetime.version")}")
 
     // Ktor server
     implementation("io.ktor:ktor-server-core:${property("ktor.version")}")

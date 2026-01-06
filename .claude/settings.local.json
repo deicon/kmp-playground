@@ -6,7 +6,11 @@
       "Bash(gradle wrapper:*)",
       "Bash(./gradlew :shared:build:*)",
       "Bash(./gradlew :shared:jvmTest:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: Complete Phase 1 - Project Foundation\n\nGradle Multi-Project Setup:\n- Configured Kotlin Multiplatform \\(2.3.0\\) with JVM and WASM-JS targets\n- Setup three modules: shared, backend, frontend\n- Configured Gradle wrapper \\(8.5\\)\n- Added version catalog in gradle.properties\n\nShared Module:\n- Created domain models \\(Customer, Project, Todo\\) with validation\n- Implemented TimeUtils for flexible time parsing \\(2h, 1.5d, 1w formats\\)\n- Added comprehensive unit tests for TimeUtils \\(12 tests passing\\)\n- Created TodoApiClient interface for backend/frontend communication\n- Added SQLDelight schema files for PostgreSQL integration\n\nBackend Module:\n- Configured Ktor 3.0.1 server dependencies\n- Added PostgreSQL and SQLDelight support\n- Setup Koin for dependency injection\n\nFrontend Module:\n- Configured Compose Multiplatform 1.7.1 for WASM target\n- Added Ktor client dependencies\n- Setup for browser-based web application\n\nDocumentation:\n- Created comprehensive README with quick start guide\n- Added CLAUDE.md for future Claude Code instances\n- Documented complete implementation plan in PROJECT_PLAN.md\n\nAll tests passing. Ready for Phase 2: Backend Development.\n\n🤖 Generated with Claude Code \\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(./gradlew :shared:test:*)",
+      "Bash(./gradlew:*)",
+      "Bash(git checkout:*)"
     ]
   }
 }
