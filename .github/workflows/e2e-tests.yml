@@ -43,7 +43,7 @@ jobs:
       - name: Start Docker Compose services
         working-directory: ./docker
         run: |
-          docker-compose up -d --build
+          docker compose up -d --build
           echo "Waiting for services to be healthy..."
 
       - name: Wait for services to be ready
@@ -102,16 +102,16 @@ jobs:
         working-directory: ./docker
         run: |
           echo "=== Backend logs ==="
-          docker-compose logs backend
+          docker compose logs backend
           echo "=== Frontend logs ==="
-          docker-compose logs frontend
+          docker compose logs frontend
           echo "=== Postgres logs ==="
-          docker-compose logs postgres
+          docker compose logs postgres
 
       - name: Stop Docker Compose services
         if: always()
         working-directory: ./docker
-        run: docker-compose down -v
+        run: docker compose down -v
 
   # Optional: Run tests on multiple browsers
   e2e-tests-cross-browser:
@@ -136,7 +136,7 @@ jobs:
       - name: Start Docker Compose services
         working-directory: ./docker
         run: |
-          docker-compose up -d --build
+          docker compose up -d --build
           echo "Waiting for services to be healthy..."
 
       - name: Wait for services to be ready
@@ -177,4 +177,4 @@ jobs:
       - name: Stop Docker Compose services
         if: always()
         working-directory: ./docker
-        run: docker-compose down -v
+        run: docker compose down -v
