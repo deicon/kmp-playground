@@ -12,7 +12,25 @@
       "Bash(./gradlew:*)",
       "Bash(git checkout:*)",
       "Bash(git reset:*)",
-      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: Complete Phase 2 - Backend Development\n\nKtor Server Setup:\n- Created Application.kt with embedded Netty server\n- Configured plugins: Serialization, CORS, Monitoring, Database, Routing\n- Added StatusPages for error handling\n- Configured CallLogging for request monitoring\n\nDatabase Integration:\n- Setup HikariCP connection pooling\n- Created DatabaseConfig with environment variable support\n- Implemented database initialization with schema creation\n- Added indexes for optimized queries\n\nRepository Layer:\n- CustomerRepositoryImpl: Full CRUD operations\n- ProjectRepositoryImpl: CRUD with customer filtering\n- TodoRepositoryImpl: CRUD with time tracking and aggregation\n- Proper date/time handling with kotlinx.datetime\n\nREST API Routes:\n- Customer endpoints: GET, POST, PUT, DELETE at /api/customers\n- Project endpoints: GET, POST, PUT, DELETE at /api/projects\n  - Supports filtering by customerId query parameter\n- Todo endpoints: GET, POST, PUT, DELETE, PATCH at /api/todos\n  - Supports filtering by projectId and completed status\n  - Special endpoints: /complete, /incomplete, /actual-hours\n  - Time statistics: /projects/{projectId}/stats\n\nConfiguration:\n- application.conf with database settings\n- logback.xml for logging configuration\n- Environment variable support for deployment\n\nDocker:\n- Multi-stage Dockerfile with Gradle Shadow plugin\n- Health check endpoint configured\n- Optimized Alpine-based runtime image\n\nAll backend tests passing. Ready for Phase 3: Frontend Development.\n\n🤖 Generated with Claude Code \\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: Complete Phase 2 - Backend Development\n\nKtor Server Setup:\n- Created Application.kt with embedded Netty server\n- Configured plugins: Serialization, CORS, Monitoring, Database, Routing\n- Added StatusPages for error handling\n- Configured CallLogging for request monitoring\n\nDatabase Integration:\n- Setup HikariCP connection pooling\n- Created DatabaseConfig with environment variable support\n- Implemented database initialization with schema creation\n- Added indexes for optimized queries\n\nRepository Layer:\n- CustomerRepositoryImpl: Full CRUD operations\n- ProjectRepositoryImpl: CRUD with customer filtering\n- TodoRepositoryImpl: CRUD with time tracking and aggregation\n- Proper date/time handling with kotlinx.datetime\n\nREST API Routes:\n- Customer endpoints: GET, POST, PUT, DELETE at /api/customers\n- Project endpoints: GET, POST, PUT, DELETE at /api/projects\n  - Supports filtering by customerId query parameter\n- Todo endpoints: GET, POST, PUT, DELETE, PATCH at /api/todos\n  - Supports filtering by projectId and completed status\n  - Special endpoints: /complete, /incomplete, /actual-hours\n  - Time statistics: /projects/{projectId}/stats\n\nConfiguration:\n- application.conf with database settings\n- logback.xml for logging configuration\n- Environment variable support for deployment\n\nDocker:\n- Multi-stage Dockerfile with Gradle Shadow plugin\n- Health check endpoint configured\n- Optimized Alpine-based runtime image\n\nAll backend tests passing. Ready for Phase 3: Frontend Development.\n\n🤖 Generated with Claude Code \\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(docker:*)",
+      "Bash(docker-compose:*)",
+      "Bash(colima status:*)",
+      "Bash(export DOCKER_HOST=unix:///Users/dieter/.colima/default/docker.sock)",
+      "Bash(curl:*)",
+      "Bash(CUSTOMER_ID=\"5aadd813-2737-4f18-84be-105ae7c6831a\":*)",
+      "Bash(PROJECT_ID=\"99d56d9a-b87a-42ba-834d-10787fd68d46\":*)",
+      "mcp__playwright__browser_navigate",
+      "Bash(cat:*)",
+      "mcp__playwright__browser_console_messages",
+      "mcp__playwright__browser_network_requests",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_close",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfix: Docker deployment issues for ARM64 and MIME types\n\n- backend/Dockerfile: Use amazoncorretto:17-alpine for ARM64 compat\n- frontend/Dockerfile: Add libatomic1 for Node.js on ARM64\n- frontend/nginx.conf: Include default MIME types to fix HTML download\n- docker-compose.yml: Remove deprecated version attribute\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(gh repo create:*)",
+      "Bash(git push:*)",
+      "Bash(git branch:*)"
     ]
   }
 }

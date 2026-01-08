@@ -15,14 +15,13 @@ data class DatabaseConfiguration(
 )
 
 fun Application.getDatabaseConfiguration(): DatabaseConfiguration {
-    val config = environment.config
     return DatabaseConfiguration(
-        host = config.property("database.host").getString(),
-        port = config.property("database.port").getString().toInt(),
-        name = config.property("database.name").getString(),
-        user = config.property("database.user").getString(),
-        password = config.property("database.password").getString(),
-        maxPoolSize = config.property("database.maxPoolSize").getString().toInt()
+        host = System.getenv("DB_HOST") ?: "localhost",
+        port = System.getenv("DB_PORT")?.toIntOrNull() ?: 5432,
+        name = System.getenv("DB_NAME") ?: "todos",
+        user = System.getenv("DB_USER") ?: "postgres",
+        password = System.getenv("DB_PASSWORD") ?: "postgres",
+        maxPoolSize = System.getenv("DB_MAX_POOL_SIZE")?.toIntOrNull() ?: 10
     )
 }
 
