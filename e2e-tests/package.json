@@ -1,0 +1,20 @@
+{
+  "name": "kmp-playground-e2e-tests",
+  "version": "1.0.0",
+  "description": "Playwright E2E tests for KMP Playground Todo App",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report",
+    "install-browsers": "playwright install chromium"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "@types/node": "^20.11.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
