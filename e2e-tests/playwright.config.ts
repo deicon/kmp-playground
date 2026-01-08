@@ -11,17 +11,16 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
 
-  // Run tests in parallel for speed
-  fullyParallel: true,
+  // Run tests serially to avoid database race conditions
+  // (tests share the same database and may conflict)
+  fullyParallel: false,
+  workers: 1,
 
   // Fail the build on CI if you accidentally left test.only in the source code
   forbidOnly: !!process.env.CI,
 
   // Retry on CI only
   retries: process.env.CI ? 2 : 0,
-
-  // Use fewer workers on CI to avoid resource contention
-  workers: process.env.CI ? 2 : undefined,
 
   // Reporter configuration
   reporter: [
