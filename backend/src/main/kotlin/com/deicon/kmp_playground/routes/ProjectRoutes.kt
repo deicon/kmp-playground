@@ -1,6 +1,8 @@
 package com.deicon.kmp_playground.routes
 
+import com.deicon.kmp_playground.models.CreateProjectRequest
 import com.deicon.kmp_playground.models.Project
+import com.deicon.kmp_playground.models.UpdateProjectRequest
 import com.deicon.kmp_playground.repository.ProjectRepository
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -38,9 +40,12 @@ fun Route.projectRoutes(repository: ProjectRepository) {
         }
 
         post {
-            val project = call.receive<Project>()
-            val newProject = project.copy(
+            val request = call.receive<CreateProjectRequest>()
+            val newProject = Project(
                 id = UUID.randomUUID().toString(),
+                customerId = request.customerId,
+                name = request.name,
+                description = request.description,
                 createdAt = Clock.System.now()
             )
             val created = repository.create(newProject)
@@ -53,9 +58,19 @@ fun Route.projectRoutes(repository: ProjectRepository) {
                 mapOf("error" to "Missing project ID")
             )
 
-            val project = call.receive<Project>()
+            val request = call.receive<UpdateProjectRequest>()
+            val existing = repository.getById(id)
+            if (existing == null) {
+                call.respond(HttpStatusCode.NotFound, mapOf("error" to "Project not found"))
+                return@put
+            }
+
+            val updatedProject = existing.copy(
+                name = request.name,
+                description = request.description
+            )
             try {
-                val updated = repository.update(id, project)
+                val updated = repository.update(id, updatedProject)
                 call.respond(updated)
             } catch (e: NoSuchElementException) {
                 call.respond(HttpStatusCode.NotFound, mapOf("error" to e.message))

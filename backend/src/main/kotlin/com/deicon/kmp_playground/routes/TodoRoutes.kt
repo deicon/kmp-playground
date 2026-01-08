@@ -1,6 +1,8 @@
 package com.deicon.kmp_playground.routes
 
+import com.deicon.kmp_playground.models.CreateTodoRequest
 import com.deicon.kmp_playground.models.Todo
+import com.deicon.kmp_playground.models.UpdateTodoRequest
 import com.deicon.kmp_playground.repository.TodoRepository
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -45,9 +47,15 @@ fun Route.todoRoutes(repository: TodoRepository) {
         }
 
         post {
-            val todo = call.receive<Todo>()
-            val newTodo = todo.copy(
+            val request = call.receive<CreateTodoRequest>()
+            val newTodo = Todo(
                 id = UUID.randomUUID().toString(),
+                projectId = request.projectId,
+                title = request.title,
+                description = request.description,
+                estimatedHours = request.estimatedHours,
+                actualHours = 0.0,
+                completed = false,
                 createdAt = Clock.System.now()
             )
             val created = repository.create(newTodo)
@@ -60,9 +68,20 @@ fun Route.todoRoutes(repository: TodoRepository) {
                 mapOf("error" to "Missing todo ID")
             )
 
-            val todo = call.receive<Todo>()
+            val request = call.receive<UpdateTodoRequest>()
+            val existing = repository.getById(id)
+            if (existing == null) {
+                call.respond(HttpStatusCode.NotFound, mapOf("error" to "Todo not found"))
+                return@put
+            }
+
+            val updatedTodo = existing.copy(
+                title = request.title,
+                description = request.description,
+                estimatedHours = request.estimatedHours
+            )
             try {
-                val updated = repository.update(id, todo)
+                val updated = repository.update(id, updatedTodo)
                 call.respond(updated)
             } catch (e: NoSuchElementException) {
                 call.respond(HttpStatusCode.NotFound, mapOf("error" to e.message))
