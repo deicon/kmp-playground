@@ -3,6 +3,7 @@ package com.deicon.kmp_playground.api
 import com.deicon.kmp_playground.models.Customer
 import com.deicon.kmp_playground.models.Project
 import com.deicon.kmp_playground.models.Todo
+import kotlinx.serialization.Serializable
 
 /**
  * API client interface for interacting with the backend.
@@ -46,6 +47,7 @@ interface TodoApiClient {
 /**
  * Data class for project time statistics
  */
+@Serializable
 data class ProjectTimeStats(
     val projectId: String,
     val totalEstimatedHours: Double,
