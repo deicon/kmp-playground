@@ -1,6 +1,8 @@
 package com.deicon.kmp_playground.routes
 
+import com.deicon.kmp_playground.models.CreateCustomerRequest
 import com.deicon.kmp_playground.models.Customer
+import com.deicon.kmp_playground.models.UpdateCustomerRequest
 import com.deicon.kmp_playground.repository.CustomerRepository
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -33,9 +35,11 @@ fun Route.customerRoutes(repository: CustomerRepository) {
         }
 
         post {
-            val customer = call.receive<Customer>()
-            val newCustomer = customer.copy(
+            val request = call.receive<CreateCustomerRequest>()
+            val newCustomer = Customer(
                 id = UUID.randomUUID().toString(),
+                name = request.name,
+                email = request.email,
                 createdAt = Clock.System.now()
             )
             val created = repository.create(newCustomer)
@@ -48,9 +52,19 @@ fun Route.customerRoutes(repository: CustomerRepository) {
                 mapOf("error" to "Missing customer ID")
             )
 
-            val customer = call.receive<Customer>()
+            val request = call.receive<UpdateCustomerRequest>()
+            val existing = repository.getById(id)
+            if (existing == null) {
+                call.respond(HttpStatusCode.NotFound, mapOf("error" to "Customer not found"))
+                return@put
+            }
+
+            val updatedCustomer = existing.copy(
+                name = request.name,
+                email = request.email
+            )
             try {
-                val updated = repository.update(id, customer)
+                val updated = repository.update(id, updatedCustomer)
                 call.respond(updated)
             } catch (e: NoSuchElementException) {
                 call.respond(HttpStatusCode.NotFound, mapOf("error" to e.message))

@@ -30,7 +30,15 @@
       "Bash(git commit -m \"$\\(cat <<''EOF''\nfix: Docker deployment issues for ARM64 and MIME types\n\n- backend/Dockerfile: Use amazoncorretto:17-alpine for ARM64 compat\n- frontend/Dockerfile: Add libatomic1 for Node.js on ARM64\n- frontend/nginx.conf: Include default MIME types to fix HTML download\n- docker-compose.yml: Remove deprecated version attribute\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
       "Bash(gh repo create:*)",
       "Bash(git push:*)",
-      "Bash(git branch:*)"
+      "Bash(git branch:*)",
+      "Bash(git commit:*)",
+      "Bash(gh pr create:*)",
+      "Bash(gh pr checks:*)",
+      "Bash(gh run view:*)",
+      "Bash(git check-ignore:*)",
+      "Bash(npm install:*)",
+      "Bash(gh run download:*)",
+      "Bash(gh run list:*)"
     ]
   }
 }

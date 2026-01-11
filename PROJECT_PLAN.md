@@ -1,4 +1,4 @@
-# Kotlin Multiplatform Full Stack Project - Implementation Plan
+ Kotlin Multiplatform Full Stack Project - Implementation Plan
 
 ## Project Overview
 Building a **Todo List Application** using Kotlin Multiplatform with:
@@ -26,7 +26,7 @@ Project {
   description: String?
   createdAt: Instant
 }
-
+##
 Todo {
   id: UUID
   projectId: UUID
